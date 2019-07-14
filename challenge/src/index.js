@@ -12,7 +12,7 @@ import { PersistGate } from 'redux-persist/es/integration/react'
 const persistConfig = {
     key: 'root',
     storage,
-   whitelist:['Article', 'loggedIn', 'userReducer']
+   whitelist:['Article', 'loggedIn', 'userReducer', 'ArticleDetail']
 }
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 let store = createStore(persistedReducer)

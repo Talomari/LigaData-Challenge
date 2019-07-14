@@ -90,11 +90,13 @@ class addArticles extends Component {
     }
 
     save = () => {
-        const { title, content, date, image } = this.state;
+        let { title, content, date, image } = this.state;
+
         if (!!title && !!content && !!date && !!image) {
             this.props.AddArticle(this.state);
             alert("Article has been added successfully")
             this.setState({ title: '', content: '', date: '', image: '' })
+            window.location.replace("/list")
 
         } else {
             alert("All fields are required")

@@ -34,3 +34,11 @@ export const setUser = (user) => {
         payload: user
     };
 }
+
+
+export const ArticleDetails = (article) => {
+    return {
+        type: 'MORE_DETAILS',
+        payload: article
+    };
+}

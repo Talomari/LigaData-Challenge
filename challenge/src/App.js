@@ -4,7 +4,7 @@ import SignUp from './Screens/SignUp';
 import Login from './Screens/Login';
 import AddArticles from './Screens/AddArticle';
 import ListArticles from './Screens/ArticleList';
-// import UpdatePassword from './Screens/UpdatePassword';
+import ArticleDetail from './Screens/ArticleDetails';
 
 
 class App extends Component {
@@ -12,27 +12,34 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-     
-   <Route path="/login" render={(props) => {
+
+          <Route path="/article/detail" render={(props) => {
+            return <div>
+              <ArticleDetail  {...props} />
+            </div>
+          }}
+          />
+
+          <Route path="/login" render={(props) => {
             return <div>
               <Login  {...props} />
             </div>
           }}
           />
-             
-   <Route path="/listarticles" render={(props) => {
+
+          <Route path="/list" render={(props) => {
             return <div>
               <ListArticles  {...props} />
             </div>
           }}
           />
-            <Route path="/addarticle" render={(props) => {
+          <Route path="/addarticle" render={(props) => {
             return <div>
               <AddArticles  {...props} />
             </div>
           }}
           />
-               <Route path="/" render={(props) => {
+          <Route path="/" render={(props) => {
             return <div>
               <SignUp  {...props} />
             </div>
