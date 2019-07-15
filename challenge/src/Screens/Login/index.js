@@ -3,7 +3,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
+import {Link} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -60,7 +60,14 @@ class Login extends Component {
             password: ''
         }
     }
+
+  hashCode = (password) => {
+    return password.split('').reduce((prevHash, currVal) =>
+      (((prevHash << 5) - prevHash) + currVal.charCodeAt(0)) | 0, 0);
+  }
+
     comparePassword = (savedPassword, password) => {
+        
         return savedPassword === password // true or false
     }
 
@@ -69,10 +76,12 @@ class Login extends Component {
         const { email, password } = this.state;
         const { isLoggedIn, setUser, user } = this.props
         if (!!user.email && user.email === email) {
-            if (this.comparePassword(user.password, password)) {
-                setUser(this.state)
+            let hashPassword = this.hashCode(password)
+            if (this.comparePassword(user.password, hashPassword)) {
+                setUser({...this.state, password:hashPassword})
                 isLoggedIn(true);
                 alert("User has been loggedIn succesfully")
+                window.location.replace('/list')
                 return;
             } else {
                 alert("Wrong password")
@@ -144,7 +153,7 @@ class Login extends Component {
                         </Button>
                             <Grid container justify="flex-end">
                                 <Grid item>
-                                    <Link href="/" variant="body2" style={{ color: '#5a005a' }}>
+                                    <Link to="/signup"  style={{ color: '#5a005a' }}>
                                         Don't have an account yet? ? Create account
                               </Link>
                                 </Grid>

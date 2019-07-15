@@ -5,7 +5,7 @@ import { TextField, Grid, Typography, Button, Paper } from '@material-ui/core';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { connect } from 'react-redux'
-import { AddArticle } from '../../Actions';
+import { UpdateArticle } from '../../Actions';
 import { purple } from '@material-ui/core/colors';
 import { ArrowBack } from '@material-ui/icons';
 
@@ -56,7 +56,7 @@ const theme = createMuiTheme({
     typography: { useNextVariants: true },
 });
 
-class addArticles extends Component {
+class updateArticle extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -98,17 +98,17 @@ class addArticles extends Component {
 
     }
 
-    save = () => {
+    Update = () => {
         let { title, content, date, image } = this.state;
 
-        if (!!title && !!content && !!date && !!image) {
-            this.props.AddArticle(this.state);
-            alert("Article has been added successfully")
+        if (!!title || !!content || !!date || !!image) {
+            this.props.UpdateArticle({ ...this.state, id: this.props.match.params.id });
+            alert("Article has been updated successfully")
             this.setState({ title: '', content: '', date: '', image: '' })
             window.location.replace("/list")
 
         } else {
-            alert("All fields are required")
+            alert("You should choose atleast one input")
         }
     }
 
@@ -126,7 +126,7 @@ class addArticles extends Component {
                 <Paper className={classes.root}>
                     <Grid container direction="column" alignContent='center' justify='center' alignItems='center'>
                         <Grid item>
-                            <Typography variant='h2' className={classes.Header}>Add Article</Typography>
+                            <Typography variant='h2' className={classes.Header}>Update Article</Typography>
                         </Grid>
                         <Grid item> <br /></Grid>
                         <MuiThemeProvider theme={theme} >
@@ -184,11 +184,10 @@ class addArticles extends Component {
                                 <br />
                             </Grid>
                             <Grid item >
-                                <Button variant="contained" onClick={this.save} className={classes.button}>
-                                    Save
+                                <Button variant="contained" onClick={this.Update} className={classes.button}>
+                                    Update
                             </Button>
                             </Grid>
-
                             <Grid item>
 
                                 <Button size="large" color="primary" href='/list'>
@@ -203,14 +202,14 @@ class addArticles extends Component {
         );
     }
 }
-AddArticle.propTypes = {
+updateArticle.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
 
 
 const mapDispatchToProps = {
-    AddArticle
+    UpdateArticle
 }
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(addArticles));
+export default connect(null, mapDispatchToProps)(withStyles(styles)(updateArticle));

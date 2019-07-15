@@ -8,8 +8,7 @@ import { ArrowBack } from '@material-ui/icons';
 
 const styles = theme => ({
     root: {
-        maxWidth: 345
-
+  
 
 
     },
@@ -42,7 +41,7 @@ class articleDetails extends Component {
                         <Card className={classes.root}>
                             <Grid container justify='center' alignItems='center'>
                                 <Grid item>
-                                    <CardHeader title={articleDetail.title} />
+                                    <CardHeader title={articleDetail.title}  />
 
                                 </Grid>
                             </Grid>
@@ -62,7 +61,8 @@ class articleDetails extends Component {
                                 <Typography variant="body2" color="textSecondary" component="p">
                                     {articleDetail.date}
                                 </Typography>
-                                {renderHTML(`${articleDetail.content}`)}
+                                <Typography style={{flexWrap:'wrap'}}>  {renderHTML(`${articleDetail.content}`)} </Typography>
+                              
                             </CardContent>
                             <CardActions>
                                 <Grid container justify='center' alignItems='center'>
