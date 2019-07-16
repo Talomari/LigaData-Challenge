@@ -1,1 +1,0 @@
-# LigaData-Challenge
